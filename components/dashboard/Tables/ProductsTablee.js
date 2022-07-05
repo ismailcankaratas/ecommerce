@@ -73,14 +73,6 @@ export default function ProductsTablee({ color, orders }) {
                       : "bg-gray-600 text-gray-200 border-gray-500")
                   }
                 >Müşteri</th>
-                <th
-                  className={
-                    "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                    (color === "light"
-                      ? "bg-gray-50 text-gray-500 border-gray-100"
-                      : "bg-gray-600 text-gray-200 border-gray-500")
-                  }
-                ></th>
               </tr>
             </thead>
             {orders.length == 0 ? (
@@ -97,14 +89,18 @@ export default function ProductsTablee({ color, orders }) {
                     </td>
                     <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap py-2">
                       <div className="flex items-center ">
-                        <BsCircleFill className="fas fa-circle text-orange-500 mr-2" /> Hazırlanıyor
+                        <BsCircleFill className="fas fa-circle text-orange-500 mr-2" />
+                        <div class="relative">
+                          <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+                            <option value="Hazırlanıyor">Hazırlanıyor</option>
+                            <option value="Kargolandı">Kargolandı</option>
+                            <option value="Teslim edildi">Teslim edildi</option>
+                          </select>
+                        </div>
                       </div>
                     </td>
                     <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap py-2">
                       {order.user.name}
-                    </td>
-                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-2 text-right">
-                      <TableDropdown />
                     </td>
                   </tr>
 

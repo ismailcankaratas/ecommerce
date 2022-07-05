@@ -6,7 +6,7 @@ import Product from "../models/Product";
 import { convertDocToObj } from "../utils/helpers";
 
 export default function Home({ products }) {
-  
+
   return (
     <Layout title="Anasayfa">
       <Header />
@@ -14,7 +14,7 @@ export default function Home({ products }) {
       <PopularProducts products={products} />
     </Layout>
   )
-}
+}""
 
 
 export async function getServerSideProps() {
@@ -24,4 +24,3 @@ export async function getServerSideProps() {
   }
 }
 
- 

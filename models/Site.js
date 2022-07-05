@@ -16,6 +16,10 @@ const Site = sequelize.define('Site', {
         type: Sequelize.STRING,
         allowNull: false
     },
+    description: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
     email: {
         type: Sequelize.STRING,
         allowNull: true

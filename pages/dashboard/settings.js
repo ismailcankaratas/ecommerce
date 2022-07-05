@@ -3,8 +3,7 @@ import React from 'react'
 import CardSettings from '../../components/dashboard/Cards/CardSettings'
 import Layout from '../../components/dashboard/Layout'
 
-export default function settings({ defaultSettings }) {
-    console.log(defaultSettings);
+export default function settings() {
     return (
         <Layout title="Genel Ayarlar">
             <div className="flex justify-center flex-wrap">
@@ -16,20 +15,6 @@ export default function settings({ defaultSettings }) {
     )
 }
 
-export async function getServerSideProps() {
 
-    try {
-        const data = await axios.get('/api/site/getSettings');
-        console.log(data);
-    } catch (error) {
-        console.log(error);
-    }
-
-    return {
-        props: {
-            defaultSettings: "ismail"
-        }
-    }
-}
 
 settings.auth = { adminOnly: true };
