@@ -1,13 +1,27 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { BsCircleFill } from 'react-icons/bs';
+import { toast } from "react-toastify";
+import axios from 'axios';
 
 // components
 
-import { BsCircleFill } from 'react-icons/bs';
-
-import TableDropdown from "../Dropdowns/TableDropdown";
-
 export default function ProductsTablee({ color, orders }) {
+  function orderState(value, order) {
+    if (value == "isDelivered") {
+      order.isDelivered = true;
+      return toast.success("Sipariş teslim edildi olarak güncellendi")
+    }
+    if (value == "gettingReady") {
+      order.isDelivered = false;
+      axios.post('/api/products/update').then((result) => {
+        console.log(result);
+      }).catch((err) => {
+        console.log(err);
+      });
+      return toast.success("Sipariş hazırlanıyor olarak güncellendi")
+    }
+  }
   return (
     <>
       <div
@@ -89,12 +103,11 @@ export default function ProductsTablee({ color, orders }) {
                     </td>
                     <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap py-2">
                       <div className="flex items-center ">
-                        <BsCircleFill className="fas fa-circle text-orange-500 mr-2" />
+                        <BsCircleFill className={`fas fa-circle mr-2 ${order.isDelivered ? "text-indigo-500" : "text-indigo-200"}`} />
                         <div class="relative">
-                          <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
-                            <option value="Hazırlanıyor">Hazırlanıyor</option>
-                            <option value="Kargolandı">Kargolandı</option>
-                            <option value="Teslim edildi">Teslim edildi</option>
+                          <select onChange={(e) => orderState(e.target.value, order)} class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-1 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+                            <option value="gettingReady">Hazırlanıyor</option>
+                            <option value="isDelivered" selected={order.isDelivered}>Teslim edildi</option>
                           </select>
                         </div>
                       </div>
