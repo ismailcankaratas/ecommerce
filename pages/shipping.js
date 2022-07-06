@@ -25,8 +25,6 @@ export default function ShippingScreen() {
     }, [setValue, shippingAddress]);
 
     function submitHandler({ fullName, address, city, postalCode, country, phoneNumber }) {
-        console.log(fullName, address, city, postalCode, country, phoneNumber);
-
         dispatch({
             type: 'SAVE_SHIPPING_ADDRESS',
             payload: { fullName, address, city, postalCode, country, phoneNumber }

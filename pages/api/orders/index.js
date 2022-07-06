@@ -31,7 +31,6 @@ const handler = async (req, res) => {
             orderItems.push(item);
         })
     })
-
     User.findByPk(user.id).then((user) => {
         return user.createOrder({
             fullName: req.body.shippingAddress.fullName,

@@ -18,7 +18,6 @@ const handler = async (req, res) => {
     const site = Site.findAll({ where: { id: 1 } });
 
     if (site) {
-        console.log(req.method);
         Site.update(req.body, { where: { id: 1 } }).then((result) => {
             return res.status(200).send({ message: "Site bilgileri başarıyla güncellendi." })
         }).catch((err) => {
