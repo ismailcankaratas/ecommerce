@@ -1,35 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Chart from "chart.js";
 
-export default function CardLineChart() {
-  React.useEffect(() => {
+export default function CardLineChart({ orderMounthInCome, orderMounthsLabel }) {
+
+  useEffect(() => {
     var config = {
       type: "line",
       data: {
-        labels: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-        ],
+        labels: orderMounthsLabel,
         datasets: [
           {
             label: new Date().getFullYear(),
             backgroundColor: "#4c51bf",
             borderColor: "#4c51bf",
-            data: [65, 78, 66, 44, 56, 67, 75],
-            fill: false,
-          },
-          {
-            label: new Date().getFullYear() - 1,
-            fill: false,
-            backgroundColor: "#fff",
-            borderColor: "#fff",
-            data: [40, 68, 86, 74, 56, 60, 87],
-          },
+            data: orderMounthInCome,
+            fill: true,
+          }
         ],
       },
       options: {
@@ -105,7 +91,7 @@ export default function CardLineChart() {
     };
     var ctx = document.getElementById("line-chart").getContext("2d");
     window.myLine = new Chart(ctx, config);
-  }, []);
+  }, [orderMounthsLabel]);
   return (
     <>
       <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-gray-700">
@@ -113,9 +99,9 @@ export default function CardLineChart() {
           <div className="flex flex-wrap items-center">
             <div className="relative w-full max-w-full flex-grow flex-1">
               <h6 className="uppercase text-gray-100 mb-1 text-xs font-semibold">
-                Overview
+                Genel Bakış
               </h6>
-              <h2 className="text-white text-xl font-semibold">Sales value</h2>
+              <h2 className="text-white text-xl font-semibold">Satış değeri</h2>
             </div>
           </div>
         </div>

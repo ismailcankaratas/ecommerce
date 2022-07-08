@@ -7,52 +7,9 @@ import { IoIosStats } from 'react-icons/io';
 import { FaUserAlt } from 'react-icons/fa';
 import { MdAttachMoney } from 'react-icons/md';
 import { CgPerformance } from 'react-icons/cg';
-import axios from "axios";
 
-function reducer(state, action) {
-    switch (action.type) {
-        case 'GET_USERS':
-            return { ...state, users: action.payload }
-        case 'GET_ORDERS':
-            return { ...state, orders: action.payload }
-        case 'CALCULATE_INCOME':
-            return { ...state, inCome: action.payload }
-        default: state;
-    }
-}
 
-export default function HeaderStats() {
-    const [{ users, orders, inCome }, dispatch] = useReducer(reducer, {
-        users: [],
-        orders: [],
-        inCome: 0
-    });
-
-    useEffect(() => {
-        const getUsers = async () => {
-            const { data } = await axios.get(`/api/users/getAll`);
-            dispatch({ type: 'GET_USERS', payload: data });
-        }
-        const getOrders = async () => {
-            const { data } = await axios.get(`/api/orders/getAll`);
-            dispatch({ type: 'GET_ORDERS', payload: data });
-        }
-        const calculateIncome = async () => {
-            let newInCome = 0;
-            orders.map(order => {
-                newInCome = order.itemsPrice;
-            })
-            dispatch({ type: 'CALCULATE_INCOME', payload: newInCome });
-        }
-        if (users.length == 0) {
-            getUsers();
-        }
-        if (orders.length == 0) {
-            getOrders();
-        }
-        calculateIncome();
-    }, [users, orders]);
-
+export default function HeaderStats({ orders, users, inCome }) {
     return (
         <>
             {/* Header */}
