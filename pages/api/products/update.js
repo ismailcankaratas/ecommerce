@@ -1,9 +1,9 @@
-import { useSession } from 'next-auth/react';
+import { getSession } from 'next-auth/react';
 import Order from '../../../models/Order';
 import { getError } from '../../../utils/error';
 
-const handler = (req, res) => {
-    const { status, data: session } = useSession();
+const handler = async (req, res) => {
+    const session = await getSession({ req });
     if (!session.user) {
         return res.status(401).send({ message: "Lütfen giriş yapınız." })
     }
@@ -11,7 +11,7 @@ const handler = (req, res) => {
         return res.status(401).send({ message: "Yetkiniz yok." })
     }
 
-    Order.update(req.body, { where: { id: req.body.id } }).then((result) => {
+    Order.update(req.body.order, { where: { id: req.body.order.id } }).then((result) => {
         return res.status(201).send({ message: "Ürün başarıyla güncellendi." })
     }).catch((err) => {
         console.log(err)
