@@ -1,8 +1,11 @@
 import React from "react";
 import { createPopper } from "@popperjs/core";
 import Link from "next/link";
+import { useSession } from 'next-auth/react';
 
 const UserDropdown = () => {
+    const { status, data: session } = useSession();
+
     // dropdown props
     const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
     const btnDropdownRef = React.createRef();
@@ -33,7 +36,9 @@ const UserDropdown = () => {
                             className="w-full rounded-full align-middle border-none shadow-lg"
                             src="/img/team-1-800x800.jpg"
                         /> */}
-                        İsmail Can
+                        {
+                            session.user.name
+                        }
                     </span>
                 </div>
             </a>
