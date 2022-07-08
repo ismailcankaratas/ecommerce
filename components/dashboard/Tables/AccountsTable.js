@@ -1,13 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useRouter } from "next/router";
 
 // components
 
-import { BsCircleFill } from 'react-icons/bs';
-
-import TableDropdown from "../Dropdowns/TableDropdown";
-
 export default function AccountsTable({ color, accounts }) {
+  const router = useRouter();
   return (
     <>
       <div
@@ -101,8 +99,10 @@ export default function AccountsTable({ color, accounts }) {
                     <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap py-2">
                       {account.isAdmin ? "Admin" : "Müşteri"}
                     </td>
-                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-2 text-right">
-                      <TableDropdown />
+                    <td>
+                      <button onClick={() => router.push('/dashboard/accounts/' + account.id)}
+                        className="bg-indigo-300 text-white px-8 py-2 rounded  cursor-pointer"
+                      >Detay</button>
                     </td>
                   </tr>
 
